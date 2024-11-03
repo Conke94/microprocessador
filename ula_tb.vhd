@@ -70,6 +70,11 @@ architecture a_ula_tb of ula_tb is
                 select_operation_a <= '0';
                 select_operation_b <= '1';
                 wait for 50 ns;
+                x <= "1010101010101010";
+                y <= "0000000000000011";
+                select_operation_a <= '1';
+                select_operation_b <= '0';
+                wait for 50 ns;
                 wait;
     end process;
 

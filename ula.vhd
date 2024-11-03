@@ -15,7 +15,8 @@ entity ula is
     signal result : unsigned(15 downto 0);
     begin
         result <= x+y when select_operation_a = '0' and select_operation_b = '0' else
-                  x-y when select_operation_a = '0' and select_operation_b = '1';
+                  x-y when select_operation_a = '0' and select_operation_b = '1' else
+                  shift_left(x, to_integer(y)) when select_operation_a = '1' and select_operation_b = '0';
 
         out_a <= result;
 
@@ -23,4 +24,4 @@ entity ula is
                      '0';
  end architecture;
 
--- DUAS OPERAÇÕES, TESTBENCH
+-- FLAG CARRY, UMA OPERAÇÃO
