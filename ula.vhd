@@ -6,7 +6,7 @@ entity ula is
     port (   
         x,y : in unsigned(15 downto 0);
         out_a :  out unsigned(15 downto 0);
-        select_operation_a, select_operation_b : in std_logic;
+        operation : in unsigned(1 downto 0);
         flag_zero: out std_logic
     );  
  end entity;
@@ -14,9 +14,9 @@ entity ula is
  architecture a_ula of ula is
     signal result : unsigned(15 downto 0);
     begin
-        result <= x+y when select_operation_a = '0' and select_operation_b = '0' else
-                  x-y when select_operation_a = '0' and select_operation_b = '1' else
-                  shift_left(x, to_integer(y)) when select_operation_a = '1' and select_operation_b = '0';
+        result <= x+y when operation = "00" else
+                  x-y when operation = "01" else
+                  shift_left(x, to_integer(y)) when operation = "10";
 
         out_a <= result;
 

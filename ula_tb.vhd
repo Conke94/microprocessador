@@ -10,21 +10,21 @@ architecture a_ula_tb of ula_tb is
         port(   
             x,y       :  in  unsigned(15 downto 0);
             out_a :  out unsigned(15 downto 0);
-            select_operation_a, select_operation_b : in std_logic;
+            operation : in unsigned(1 downto 0);
             flag_zero: out std_logic
         );
     end component;
 
     signal x, y, out_a : unsigned(15 downto 0);
-    signal select_operation_a, select_operation_b, flag_zero : std_logic;
+    signal operation : unsigned(1 downto 0);
+    signal flag_zero : std_logic;
 
     begin
         uut : ula port map(
             x => x,
             y => y,
             out_a => out_a,
-            select_operation_a => select_operation_a,
-            select_operation_b => select_operation_b,
+            operation => operation,
             flag_zero => flag_zero
         );
     
@@ -32,48 +32,39 @@ architecture a_ula_tb of ula_tb is
             begin
                 x <= "1111111111111111";
                 y <= "1111111111111111";
-                select_operation_a <= '0';
-                select_operation_b <= '0';
+                operation <= "00";
                 wait for 50 ns;
                 x <= "1111111111111111";
                 y <= "1111111111111111";
-                select_operation_a <= '0';
-                select_operation_b <= '1';
+                operation <= "01";
                 wait for 50 ns;
                 x <= "0000000000000000";
                 y <= "0000000000000000";
-                select_operation_a <= '0';
-                select_operation_b <= '0';
+                operation <= "00";
                 wait for 50 ns;
                 x <= "0000000000000000";
                 y <= "0000000000000000";
-                select_operation_a <= '0';
-                select_operation_b <= '1';
+                operation <= "01";
                 wait for 50 ns;
                 x <= "0000000000001000";
                 y <= "0000000000000100";
-                select_operation_a <= '0';
-                select_operation_b <= '0';
+                operation <= "00";
                 wait for 50 ns;
                 x <= "0000000000001000";
                 y <= "0000000000000100";
-                select_operation_a <= '0';
-                select_operation_b <= '1';
+                operation <= "01";
                 wait for 50 ns;
                 x <= "0000000000000100";
                 y <= "0000000000001000";
-                select_operation_a <= '0';
-                select_operation_b <= '0';
+                operation <= "00";
                 wait for 50 ns;
                 x <= "0000000000000100";
                 y <= "0000000000001000";
-                select_operation_a <= '0';
-                select_operation_b <= '1';
+                operation <= "01";
                 wait for 50 ns;
                 x <= "1010101010101010";
                 y <= "0000000000000011";
-                select_operation_a <= '1';
-                select_operation_b <= '0';
+                operation <= "10";
                 wait for 50 ns;
                 wait;
     end process;
