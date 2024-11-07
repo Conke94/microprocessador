@@ -11,13 +11,14 @@ architecture a_ula_tb of ula_tb is
             x,y       :  in  unsigned(15 downto 0);
             out_a :  out unsigned(15 downto 0);
             operation : in unsigned(1 downto 0);
-            flag_zero: out std_logic
+            flag_zero: out std_logic;
+            flag_carry: out std_logic
         );
     end component;
 
     signal x, y, out_a : unsigned(15 downto 0);
     signal operation : unsigned(1 downto 0);
-    signal flag_zero : std_logic;
+    signal flag_zero, flag_carry : std_logic;
 
     begin
         uut : ula port map(
@@ -25,7 +26,8 @@ architecture a_ula_tb of ula_tb is
             y => y,
             out_a => out_a,
             operation => operation,
-            flag_zero => flag_zero
+            flag_zero => flag_zero,
+            flag_carry => flag_carry
         );
     
         process
@@ -65,6 +67,18 @@ architecture a_ula_tb of ula_tb is
                 x <= "1010101010101010";
                 y <= "0000000000000011";
                 operation <= "10";
+                wait for 50 ns;
+                x <= "1010101010101010";
+                y <= "0110000000000011";
+                operation <= "00";
+                wait for 50 ns;
+                x <= "1010101010101010";
+                y <= "0000000000000011";
+                operation <= "11";
+                wait for 50 ns;
+                x <= "0100101101010101";
+                y <= "1100111110110011";
+                operation <= "11";
                 wait for 50 ns;
                 wait;
     end process;
