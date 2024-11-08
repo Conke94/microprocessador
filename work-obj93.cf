@@ -1,4 +1,7 @@
 v 4
+file . ".\reg16bits.vhd" "c6005270a30d5b96b52dba810e21cb42db7c84cc" "20241107192417.398":
+  entity reg16bits at 1( 0) + 0 on 95;
+  architecture a_reg16bits of reg16bits at 15( 310) + 0 on 96;
 file . ".\ula_tb.vhd" "0d06f696bbccfffa71de9a51445fc8ca155b9995" "20241107004650.490":
   entity ula_tb at 1( 0) + 0 on 91;
   architecture a_ula_tb of ula_tb at 8( 107) + 0 on 92;
@@ -17,3 +20,6 @@ file . ".\soma_e_sub_tb.vhd" "a6ae9244e7812ef0b13a32240d2403051ce52840" "2024103
 file . ".\ula.vhd" "8bbcc8023cde815e13d62ea1ff78ecff47970776" "20241107004308.668":
   entity ula at 1( 0) + 0 on 83;
   architecture a_ula of ula at 15( 332) + 1 on 84;
+file . ".\reg16bits_tb.vhd" "ed0e6f3fb4ab6ec580856ddac37716603be8bb78" "20241107195842.379":
+  entity reg16bits_tb at 1( 0) + 0 on 99;
+  architecture a_reg16bits_tb of reg16bits_tb at 8( 113) + 0 on 100;
