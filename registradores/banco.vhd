@@ -21,8 +21,8 @@ architecture a_banco of banco is
         );
     end component;
     signal registro: unsigned(15 downto 0);
-    SIGNAL wr_en0, wr_en1, wr_en2, wr_en3, wr_en4 : std_logic := '0';
-    SIGNAL data0, data1, data2, data3, data4 : unsigned(15 DOWNTO 0) := "0000000000000000";
+    signal wr_en0, wr_en1, wr_en2, wr_en3, wr_en4 : std_logic := '0';
+    signal data0, data1, data2, data3, data4 : unsigned(15 DOWNTO 0) := "0000000000000000";
     begin
         reg0 : reg16bits PORT MAP(clk => clk, reset => reset, wr_en => wr_en0, data_in => data_in, data_out => data0);
         reg1 : reg16bits PORT MAP(clk => clk, reset => reset, wr_en => wr_en1, data_in => data_in, data_out => data1);
