@@ -1,25 +1,34 @@
 v 4
-file . ".\reg16bits.vhd" "c6005270a30d5b96b52dba810e21cb42db7c84cc" "20241107192417.398":
-  entity reg16bits at 1( 0) + 0 on 95;
-  architecture a_reg16bits of reg16bits at 15( 310) + 0 on 96;
-file . ".\ula_tb.vhd" "0d06f696bbccfffa71de9a51445fc8ca155b9995" "20241107004650.490":
-  entity ula_tb at 1( 0) + 0 on 91;
-  architecture a_ula_tb of ula_tb at 8( 107) + 0 on 92;
-file . ".\soma_e_sub.vhd" "57918fd1f04b394fdb4af3fe9b6d73d3e3534d87" "20241031201847.931":
-  entity soma_e_sub at 1( 0) + 0 on 23;
-  architecture a_soma_e_sub of soma_e_sub at 12( 267) + 1 on 24;
-file . ".\mux8x1.vhd" "e8bd89b71ce4386217225859ffecaf1748113234" "20241031193148.988":
-  entity mux8x1 at 1( 0) + 0 on 11;
-  architecture a_mux8x1 of mux8x1 at 12( 247) + 0 on 12;
-file . ".\mux8x1_tb.vhd" "bf6d1e6539fab652b6899a220b99f0f64a75e2c8" "20241031194823.500":
-  entity mux8x1_tb at 1( 0) + 0 on 13;
-  architecture a_mux8x1 of mux8x1_tb at 8( 85) + 0 on 14;
-file . ".\soma_e_sub_tb.vhd" "a6ae9244e7812ef0b13a32240d2403051ce52840" "20241031203216.935":
-  entity soma_e_sub_tb at 1( 0) + 0 on 31;
-  architecture a_soma_e_sub_tb of soma_e_sub_tb at 8( 114) + 0 on 32;
-file . ".\ula.vhd" "8bbcc8023cde815e13d62ea1ff78ecff47970776" "20241107004308.668":
-  entity ula at 1( 0) + 0 on 83;
-  architecture a_ula of ula at 15( 332) + 1 on 84;
+file . ".\microprocessador_tb.vhd" "37a76d809dd2af6d6483b784eb93dee78aa40d4f" "20241114015825.966":
+  entity microprocessador_tb at 1( 0) + 0 on 129;
+  architecture a_microprocessador_tb of microprocessador_tb at 8( 120) + 0 on 130;
+file . ".\registradores\banco.vhd" "1139f20321d3857b1e09255f39237eec0074d91d" "20241114003212.318":
+  entity banco at 1( 0) + 0 on 23;
+  architecture a_banco of banco at 15( 345) + 0 on 24;
+file . ".\microprocessador.vhd" "19119a01be10d6925bb3af64c554be0389b0cde4" "20241114015746.756":
+  entity microprocessador at 1( 0) + 0 on 127;
+  architecture a_microprocessador of microprocessador at 18( 485) + 0 on 128;
 file . ".\reg16bits_tb.vhd" "ed0e6f3fb4ab6ec580856ddac37716603be8bb78" "20241107195842.379":
   entity reg16bits_tb at 1( 0) + 0 on 99;
   architecture a_reg16bits_tb of reg16bits_tb at 8( 113) + 0 on 100;
+file . ".\ula.vhd" "8bbcc8023cde815e13d62ea1ff78ecff47970776" "20241107004308.668":
+  entity ula at 1( 0) + 0 on 83;
+  architecture a_ula of ula at 15( 332) + 1 on 84;
+file . ".\soma_e_sub_tb.vhd" "a6ae9244e7812ef0b13a32240d2403051ce52840" "20241031203216.935":
+  entity soma_e_sub_tb at 1( 0) + 0 on 31;
+  architecture a_soma_e_sub_tb of soma_e_sub_tb at 8( 114) + 0 on 32;
+file . ".\mux8x1_tb.vhd" "bf6d1e6539fab652b6899a220b99f0f64a75e2c8" "20241031194823.500":
+  entity mux8x1_tb at 1( 0) + 0 on 13;
+  architecture a_mux8x1 of mux8x1_tb at 8( 85) + 0 on 14;
+file . ".\mux8x1.vhd" "e8bd89b71ce4386217225859ffecaf1748113234" "20241031193148.988":
+  entity mux8x1 at 1( 0) + 0 on 11;
+  architecture a_mux8x1 of mux8x1 at 12( 247) + 0 on 12;
+file . ".\soma_e_sub.vhd" "57918fd1f04b394fdb4af3fe9b6d73d3e3534d87" "20241031201847.931":
+  entity soma_e_sub at 1( 0) + 0 on 23;
+  architecture a_soma_e_sub of soma_e_sub at 12( 267) + 1 on 24;
+file . ".\ula_tb.vhd" "0d06f696bbccfffa71de9a51445fc8ca155b9995" "20241107004650.490":
+  entity ula_tb at 1( 0) + 0 on 91;
+  architecture a_ula_tb of ula_tb at 8( 107) + 0 on 92;
+file . ".\registradores\reg16bits.vhd" "c6005270a30d5b96b52dba810e21cb42db7c84cc" "20241108223239.011":
+  entity reg16bits at 1( 0) + 0 on 11;
+  architecture a_reg16bits of reg16bits at 15( 310) + 0 on 12;
