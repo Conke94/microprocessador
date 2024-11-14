@@ -26,8 +26,9 @@ entity ula is
         -- Faz a operação escolhida
         result <= x+y when operation = "00" else
                   x-y when operation = "01" else
-                  shift_left(x, to_integer(y)) when operation = "10" else
-                  x xor y;
+                  shift_right(x, to_integer(y)) when operation = "10" else
+                  x xor y when operation = "11" else
+                  x;
 
 
         -- Atualiza a flag zero

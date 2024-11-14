@@ -53,8 +53,10 @@ architecture a_microprocessador of microprocessador is
 
         ula_main : ula PORT MAP(
             operation=>operation, 
-            x=>operando, 
-            y=>acumulador_value, 
+            x=>acumulador_value,
+            y=>operando,
+            -- x=>operando, 
+            -- y=>acumulador_value, 
             out_a=>ula_out, 
             flag_zero=>ula_zero,
             flag_carry=>ula_carry
