@@ -7,7 +7,6 @@ entity microprocessador is
         clk, reset, wr_en : in std_logic;
         reg_read, reg_wr: in unsigned(2 downto 0);
         operation : unsigned(1 downto 0);
-        data_in : in unsigned(15 downto 0);
         ula_zero, ula_carry : out std_logic;
         imm : in unsigned(15 downto 0);
         sel_imm : in std_logic
@@ -55,8 +54,6 @@ architecture a_microprocessador of microprocessador is
             operation=>operation, 
             x=>acumulador_value,
             y=>operando,
-            -- x=>operando, 
-            -- y=>acumulador_value, 
             out_a=>ula_out, 
             flag_zero=>ula_zero,
             flag_carry=>ula_carry
@@ -69,7 +66,7 @@ architecture a_microprocessador of microprocessador is
             wr_en=>wr_en, 
             reg_wr=>reg_wr, 
             reg_read=>reg_read, 
-            data_in=>data_in,
+            data_in=>imm,
             data_out=>valor_registrador
         );
 

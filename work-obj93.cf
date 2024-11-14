@@ -8,15 +8,15 @@ file . "reg16bits.vhd" "cc8258126980b79eb537d205c7524fd64b29047f" "2024111419181
 file . "ula_tb.vhd" "e53861ac594605525804498b6e01bd0121caafd4" "20241114191652.560":
   entity ula_tb at 1( 0) + 0 on 113;
   architecture a_ula_tb of ula_tb at 8( 100) + 0 on 114;
-file . "microprocessador_tb.vhd" "a1e24c260603941433fcabc59ddace49c30677ac" "20241114191907.708":
-  entity microprocessador_tb at 1( 0) + 0 on 129;
-  architecture a_microprocessador_tb of microprocessador_tb at 8( 113) + 0 on 130;
+file . "microprocessador_tb.vhd" "e483ae2ffca610a7b7c5ca8ca67f29f609258341" "20241114195312.992":
+  entity microprocessador_tb at 1( 0) + 0 on 137;
+  architecture a_microprocessador_tb of microprocessador_tb at 8( 113) + 0 on 138;
 file . ".\banco_tb.vhd" "3a02bc287e39bd2dee5d85c5862e3741c30311e5" "20241112022102.743":
   entity banco_tb at 1( 0) + 0 on 21;
   architecture a_banco_tb of banco_tb at 8( 109) + 0 on 22;
-file . "microprocessador.vhd" "a6369b29bf2ce5788eded9316f6fd602b817a709" "20241114191857.260":
-  entity microprocessador at 1( 0) + 0 on 127;
-  architecture a_microprocessador of microprocessador at 17( 422) + 0 on 128;
+file . "microprocessador.vhd" "2f5ffc9711145148b89c209d25b25b1fb5ba5e7f" "20241114195312.944":
+  entity microprocessador at 1( 0) + 0 on 135;
+  architecture a_microprocessador of microprocessador at 16( 378) + 0 on 136;
 file . "ula.vhd" "dc6817cb2aed056bec97fe2593cec2f295aeae14" "20241114191643.390":
   entity ula at 1( 0) + 0 on 111;
   architecture a_ula of ula at 15( 318) + 1 on 112;
