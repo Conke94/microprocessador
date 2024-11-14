@@ -36,11 +36,13 @@ architecture a_banco of banco is
         wr_en3 <= '1' when wr_en = '1' and reg_wr = "011" else '0';
         wr_en4 <= '1' when wr_en = '1' and reg_wr = "100" else '0';
 
-        data_out <= data0 when reg_read = "000" else
+        registro <= data0 when reg_read = "000" else
                     data1 when reg_read = "001" else
                     data2 when reg_read = "010" else
                     data3 when reg_read = "011" else
                     data4 when reg_read = "100" else
                     "0000000000000000";
+
+        data_out <= registro;
 
 end architecture;

@@ -8,7 +8,6 @@ entity microprocessador is
         reg_read, reg_wr: in unsigned(2 downto 0);
         operation : unsigned(1 downto 0);
         data_in : in unsigned(15 downto 0);
-        data_out : out unsigned(15 downto 0);
         ula_zero, ula_carry : out std_logic;
         imm : in unsigned(15 downto 0);
         sel_imm : in std_logic
@@ -36,18 +35,31 @@ architecture a_microprocessador of microprocessador is
     ); 
     end component;
 
+    component reg16bits is
+        port(
+            clk, reset, wr_en : in std_logic;
+            data_in : in unsigned(15 downto 0);
+            data_out : out unsigned(15 downto 0)
+        );
+    end component;
+
+    signal ula_out : unsigned(15 downto 0) := "0000000000000000";
     signal operando : unsigned(15 downto 0) := "0000000000000000";
-    signal acumulador : unsigned(15 downto 0) := "0000000000000000";
+    signal acumulador_value : unsigned(15 downto 0) := "0000000000000000";
+    signal valor_registrador : unsigned(15 downto 0) := "0000000000000000";
     
     begin
+        acumulador : reg16bits PORT MAP(clk => clk, reset => reset, wr_en => wr_en, data_in => ula_out, data_out => acumulador_value);
+
         ula_main : ula PORT MAP(
             operation=>operation, 
             x=>operando, 
-            y=>acumulador, 
-            out_a=>acumulador, 
+            y=>acumulador_value, 
+            out_a=>ula_out, 
             flag_zero=>ula_zero,
             flag_carry=>ula_carry
         );
+
         
         banco_registradores : banco PORT MAP (
             clk=>clk,
@@ -56,10 +68,10 @@ architecture a_microprocessador of microprocessador is
             reg_wr=>reg_wr, 
             reg_read=>reg_read, 
             data_in=>data_in,
-            data_out=>operando
+            data_out=>valor_registrador
         );
 
         operando <= imm when sel_imm = '1' else
-            operando;
+            valor_registrador;
 
 end architecture;
