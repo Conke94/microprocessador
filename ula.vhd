@@ -14,14 +14,19 @@ entity ula is
 
  architecture a_ula of ula is
     signal result : unsigned(15 downto 0);
+    signal carry_sum, carry_sub : std_logic;
     signal x_increased, y_increased, sum_increased: unsigned(16 downto 0);
 
     begin
-        -- Verifica se a flag de carry é ativa na soma
         x_increased <= '0' & x; y_increased <= '0' & y;
         sum_increased <= x_increased + y_increased;
-        flag_carry <= sum_increased(16) when operation = "00" else '0'; 
 
+        carry_sum <= sum_increased(16);
+        carry_sub <= '0' WHEN y <= x ELSE '1';
+
+        flag_carry <= carry_sum WHEN operation = "00" else 
+                      carry_sub WHEN operation = "01" else
+                      '0';
 
         -- Faz a operação escolhida
         result <= x+y when operation = "00" else
