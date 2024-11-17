@@ -1,4 +1,7 @@
 v 4
+file . ".\state_machine\stateMachine_tb.vhd" "1ecd4dc1bb5061ef8a82f584cbfd07ad79bbeb3a" "20241117175512.625":
+  entity statemachine_tb at 1( 0) + 0 on 29;
+  architecture a_statemachine_tb of statemachine_tb at 8( 116) + 0 on 30;
 file . ".\rom\rom.vhd" "176a70ec55f8b91c3267f032a8ed6ba31dc9f965" "20241117173139.777":
   entity rom at 1( 0) + 0 on 21;
   architecture a_rom of rom at 11( 238) + 0 on 22;
@@ -17,3 +20,6 @@ file . ".\registradores\reg16bits.vhd" "c6005270a30d5b96b52dba810e21cb42db7c84cc
 file . ".\rom\rom_tb.vhd" "f500b202a8e19fb8af957963c6c2ac2540c842ca" "20241117173654.512":
   entity rom_tb at 1( 0) + 0 on 25;
   architecture a_rom_tb of rom_tb at 8( 107) + 0 on 26;
+file . ".\state_machine\stateMachine.vhd" "f79dcb9dd68d46a113a350913c72b8f9e291f5ec" "20241117175040.528":
+  entity statemachine at 1( 0) + 0 on 27;
+  architecture a_statemachine of statemachine at 13( 227) + 0 on 28;
