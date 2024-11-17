@@ -1,25 +1,13 @@
 v 4
-file . "banco.vhd" "aab3b089146a6aa002c9d0e20fca56afc69a206b" "20241114191842.412":
-  entity banco at 1( 0) + 0 on 125;
-  architecture a_banco of banco at 15( 331) + 0 on 126;
-file . "ula.vhd" "d8f19e4aa9e61a3c42e21eae8035d85db15540a3" "20241114201235.496":
-  entity ula at 1( 0) + 0 on 141;
-  architecture a_ula of ula at 15( 318) + 1 on 142;
-file . "microprocessador.vhd" "2f5ffc9711145148b89c209d25b25b1fb5ba5e7f" "20241114195312.944":
-  entity microprocessador at 1( 0) + 0 on 135;
-  architecture a_microprocessador of microprocessador at 16( 378) + 0 on 136;
-file . ".\banco_tb.vhd" "3a02bc287e39bd2dee5d85c5862e3741c30311e5" "20241112022102.743":
-  entity banco_tb at 1( 0) + 0 on 21;
-  architecture a_banco_tb of banco_tb at 8( 109) + 0 on 22;
-file . "microprocessador_tb.vhd" "e483ae2ffca610a7b7c5ca8ca67f29f609258341" "20241114195312.992":
-  entity microprocessador_tb at 1( 0) + 0 on 137;
-  architecture a_microprocessador_tb of microprocessador_tb at 8( 113) + 0 on 138;
-file . "ula_tb.vhd" "e53861ac594605525804498b6e01bd0121caafd4" "20241114201250.407":
-  entity ula_tb at 1( 0) + 0 on 143;
-  architecture a_ula_tb of ula_tb at 8( 100) + 0 on 144;
-file . "reg16bits.vhd" "cc8258126980b79eb537d205c7524fd64b29047f" "20241114191814.203":
-  entity reg16bits at 1( 0) + 0 on 119;
-  architecture a_reg16bits of reg16bits at 15( 296) + 0 on 120;
-file . "reg16bits_tb.vhd" "6a6b6031ee78ceebc3f0122454120bd481dd5bf4" "20241114191823.030":
-  entity reg16bits_tb at 1( 0) + 0 on 121;
-  architecture a_reg16bits_tb of reg16bits_tb at 8( 106) + 0 on 122;
+file . ".\registradores\reg16bits.vhd" "c6005270a30d5b96b52dba810e21cb42db7c84cc" "20241117171612.618":
+  entity reg16bits at 1( 0) + 0 on 19;
+  architecture a_reg16bits of reg16bits at 15( 310) + 0 on 20;
+file . ".\ula\ula.vhd" "423a51c8329fe82c013d03fffcd68faf35750354" "20241117171543.013":
+  entity ula at 1( 0) + 0 on 15;
+  architecture a_ula of ula at 15( 332) + 1 on 16;
+file . ".\microprocessador.vhd" "749ab5881175b9eaf6cfb1f0931e9a16cc2a99f6" "20241117171500.701":
+  entity microprocessador at 1( 0) + 0 on 13;
+  architecture a_microprocessador of microprocessador at 16( 393) + 0 on 14;
+file . ".\registradores\banco.vhd" "2687f3754c1e4dfa4d99400e749ef73e148a5ecb" "20241117171558.768":
+  entity banco at 1( 0) + 0 on 17;
+  architecture a_banco of banco at 15( 345) + 0 on 18;
