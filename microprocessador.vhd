@@ -42,24 +42,42 @@ architecture a_microprocessador of microprocessador is
         );
     end component;
 
+    component rom is
+        port( 
+            clk      : in std_logic;
+            endereco : in unsigned(6 downto 0);
+            dado     : out unsigned(15 downto 0) 
+         );
+    end component;
+
+    component pc is
+        port(
+            clk, reset, wr_en : in std_logic;
+            data_in : in unsigned(6 downto 0);
+            data_out : out unsigned(6 downto 0)
+        );
+    end component;
+
+    component increment is
+        port (   
+            data_in : in unsigned(6 downto 0);
+            data_out :  out unsigned(6 downto 0)
+        );  
+    end component;
+
+    signal rom_out : unsigned(15 downto 0);
+    signal endereco : unsigned(6 downto 0) := "0000000";
+    signal endereco_incremented : unsigned(6 downto 0) := "0000000";
     signal ula_out : unsigned(15 downto 0) := "0000000000000000";
     signal operando : unsigned(15 downto 0) := "0000000000000000";
     signal acumulador_value : unsigned(15 downto 0) := "0000000000000000";
     signal valor_registrador : unsigned(15 downto 0) := "0000000000000000";
     
     begin
-        acumulador : reg16bits PORT MAP(clk => clk, reset => reset, wr_en => wr_en, data_in => ula_out, data_out => acumulador_value);
+        program_counter : pc PORT MAP(clk => clk, reset => reset, wr_en => '1', data_in => endereco_incremented, data_out => endereco);
+        program_counter_increment : increment PORT MAP (data_in => endereco, data_out => endereco_incremented);
+        rom_main : rom PORT MAP (clk => clk, endereco => endereco, dado => rom_out);
 
-        ula_main : ula PORT MAP(
-            operation=>operation, 
-            x=>acumulador_value,
-            y=>operando,
-            out_a=>ula_out, 
-            flag_zero=>ula_zero,
-            flag_carry=>ula_carry
-        );
-
-        
         banco_registradores : banco PORT MAP (
             clk=>clk,
             reset=>reset, 
@@ -70,7 +88,16 @@ architecture a_microprocessador of microprocessador is
             data_out=>valor_registrador
         );
 
-        operando <= imm when sel_imm = '1' else
-            valor_registrador;
+        operando <= imm when sel_imm = '1' else valor_registrador;
 
+        ula_main : ula PORT MAP(
+            operation=>operation, 
+            x=>acumulador_value,
+            y=>operando,
+            out_a=>ula_out, 
+            flag_zero=>ula_zero,
+            flag_carry=>ula_carry
+        );
+
+        acumulador : reg16bits PORT MAP(clk => clk, reset => reset, wr_en => wr_en, data_in => ula_out, data_out => acumulador_value);
 end architecture;
