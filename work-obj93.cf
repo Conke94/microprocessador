@@ -1,4 +1,7 @@
 v 4
+file . ".\rom\pc_tb.vhd" "aa9d629de4e74dfa926c272510ed9362d3b04800" "20241117215447.976":
+  entity pc_tb at 1( 0) + 0 on 33;
+  architecture a_pc_tb of pc_tb at 8( 106) + 0 on 34;
 file . ".\state_machine\stateMachine_tb.vhd" "1ecd4dc1bb5061ef8a82f584cbfd07ad79bbeb3a" "20241117175512.625":
   entity statemachine_tb at 1( 0) + 0 on 29;
   architecture a_statemachine_tb of statemachine_tb at 8( 116) + 0 on 30;
@@ -23,3 +26,6 @@ file . ".\rom\rom_tb.vhd" "f500b202a8e19fb8af957963c6c2ac2540c842ca" "2024111717
 file . ".\state_machine\stateMachine.vhd" "f79dcb9dd68d46a113a350913c72b8f9e291f5ec" "20241117175040.528":
   entity statemachine at 1( 0) + 0 on 27;
   architecture a_statemachine of statemachine at 13( 227) + 0 on 28;
+file . ".\rom\pc.vhd" "1454a582a2ccf8917bbfd23bb4b074f55a08ffa0" "20241117215420.338":
+  entity pc at 1( 0) + 0 on 31;
+  architecture a_pc of pc at 13( 254) + 0 on 32;
