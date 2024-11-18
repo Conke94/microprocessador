@@ -6,7 +6,7 @@ entity controller is
     port (   
         jump_en : out std_logic;
         clk, reset : in std_logic;
-        data_in : in unsigned(6 downto 0);
+        last_adress : in unsigned(6 downto 0);
         adress_out :  out unsigned(6 downto 0);
         instruction : in unsigned(15 downto 0)
     );  
@@ -22,14 +22,15 @@ entity controller is
     end component;
 
     signal opcode: unsigned(3 downto 0);
-    signal state : std_logic;
+    signal state, jump : std_logic;
     
     begin
         state_machine : stateMachine PORT MAP(clk => clk, reset => reset, state_out => state);
 
         opcode <= instruction(3 downto 0);
-        jump_en <=  '1' when opcode="1111" else '0'; 
 
-        adress_out <= data_in when state = '0' else data_in + 1;
-            
+        jump <= '1' when opcode="1111" else '0'; 
+        jump_en <= jump;
+
+        adress_out <= last_adress + 1 when jump = '0' else last_adress; -- Falta colocar jump correto.
  end architecture;

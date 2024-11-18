@@ -62,7 +62,7 @@ architecture a_microprocessador of microprocessador is
         port (   
             jump_en : out std_logic;
             clk, reset : in std_logic;
-            data_in : in unsigned(6 downto 0);
+            last_adress : in unsigned(6 downto 0);
             adress_out :  out unsigned(6 downto 0);
             instruction : in unsigned(15 downto 0)
         );  
@@ -77,9 +77,28 @@ architecture a_microprocessador of microprocessador is
     signal valor_registrador : unsigned(15 downto 0) := "0000000000000000";
     
     begin
-        program_counter : pc PORT MAP(clk => clk, reset => reset, wr_en => '1', data_in => pc_in, data_out => endereco);
-        controller_unit : controller PORT MAP (clk => clk, reset => reset, data_in => endereco, adress_out => pc_in, instruction => rom_out, jump_en => jump_en);
-        rom_main : rom PORT MAP (clk => clk, endereco => endereco, dado => rom_out);
+        program_counter : pc PORT MAP(
+            clk => clk, 
+            reset => reset, 
+            wr_en => '1', 
+            data_in => pc_in, 
+            data_out => endereco
+        );
+
+        controller_unit : controller PORT MAP (
+            clk => clk, 
+            reset => reset, 
+            last_adress => endereco, 
+            adress_out => pc_in, 
+            instruction => rom_out, 
+            jump_en => jump_en
+        );
+
+        rom_main : rom PORT MAP (
+            clk => clk, 
+            endereco => endereco, 
+            dado => rom_out
+        );
 
         banco_registradores : banco PORT MAP (
             clk=>clk,
