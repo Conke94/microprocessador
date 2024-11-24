@@ -4,12 +4,11 @@ use ieee.numeric_std.all;
 
 entity microprocessador is
     port(
-        clk, reset, wr_en : in std_logic;
+        clk, reset, wr_en, sel_imm : in std_logic;
+        ula_zero, ula_carry, jump_en : out std_logic;
         reg_read, reg_wr: in unsigned(2 downto 0);
         operation : unsigned(1 downto 0);
-        ula_zero, ula_carry, jump_en : out std_logic;
-        imm : in unsigned(15 downto 0);
-        sel_imm : in std_logic
+        imm : in unsigned(15 downto 0)
     );
 end entity;
 
@@ -17,8 +16,7 @@ architecture a_microprocessador of microprocessador is
     component banco is
         port(
         clk, reset, wr_en : in std_logic;
-        reg_wr: in unsigned(2 downto 0);
-        reg_read: in unsigned(2 downto 0);
+        reg_wr, reg_read: in unsigned(2 downto 0);
         data_in : in unsigned(15 downto 0);
         data_out : out unsigned(15 downto 0)
     );
@@ -29,8 +27,7 @@ architecture a_microprocessador of microprocessador is
         x,y : in unsigned(15 downto 0);
         out_a :  out unsigned(15 downto 0);
         operation : in unsigned(1 downto 0);
-        flag_carry: out std_logic;
-        flag_zero: out std_logic
+        flag_carry, flag_zero: out std_logic
     ); 
     end component;
 
@@ -77,28 +74,18 @@ architecture a_microprocessador of microprocessador is
     signal valor_registrador : unsigned(15 downto 0) := "0000000000000000";
     
     begin
-        program_counter : pc PORT MAP(
-            clk => clk, 
-            reset => reset, 
-            wr_en => '1', 
-            data_in => pc_in, 
-            data_out => endereco
-        );
+        program_counter : pc PORT MAP(clk, reset, wr_en => '1', data_in => pc_in, data_out => endereco);
 
         controller_unit : controller PORT MAP (
             clk => clk, 
             reset => reset, 
             last_adress => endereco, 
             adress_out => pc_in, 
-            instruction => rom_out, 
+            instruction => rom_out,
             jump_en => jump_en
         );
 
-        rom_main : rom PORT MAP (
-            clk => clk, 
-            endereco => endereco, 
-            dado => rom_out
-        );
+        rom_main : rom PORT MAP (clk, endereco, dado => rom_out);
 
         banco_registradores : banco PORT MAP (
             clk=>clk,

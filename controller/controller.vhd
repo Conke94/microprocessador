@@ -13,24 +13,26 @@ entity controller is
  end entity;
 
  architecture a_controller of controller is
-    component stateMachine is
+    component state_machine is
         port(
-            clk : in std_logic;
-            reset : in std_logic;
-            state_out : out std_logic
+            clk, reset : in std_logic;
+            state : out unsigned(1 downto 0)
         );
     end component;
 
     signal opcode: unsigned(3 downto 0);
-    signal state, jump : std_logic;
+    signal jump : std_logic;
+    signal state : unsigned(1 downto 0);
     
     begin
-        state_machine : stateMachine PORT MAP(clk => clk, reset => reset, state_out => state);
+        state_mach : state_machine PORT MAP(clk, reset, state);
 
         opcode <= instruction(3 downto 0);
 
         jump <= '1' when opcode="1111" else '0'; 
         jump_en <= jump;
 
-        adress_out <= last_adress + 1 when jump = '0' else last_adress; -- Falta colocar jump correto.
+        adress_out <= last_adress + 1 when jump = '0' and state = "10" else 
+                      instruction(15 downto 9) when state = "10" else
+                      last_adress;
  end architecture;
