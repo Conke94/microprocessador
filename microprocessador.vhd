@@ -4,11 +4,8 @@ use ieee.numeric_std.all;
 
 entity microprocessador is
     port(
-        clk, reset, wr_en, sel_imm : in std_logic;
-        ula_zero, ula_carry, jump_en : out std_logic;
-        reg_read, reg_wr: in unsigned(2 downto 0);
-        operation : unsigned(1 downto 0);
-        imm : in unsigned(15 downto 0)
+        clk, reset : in std_logic;
+        ula_zero, ula_carry, jump_en : out std_logic
     );
 end entity;
 
@@ -16,7 +13,7 @@ architecture a_microprocessador of microprocessador is
     component banco is
         port(
         clk, reset, wr_en : in std_logic;
-        reg_wr, reg_read: in unsigned(2 downto 0);
+        reg_wr, reg_read : in unsigned(2 downto 0);
         data_in : in unsigned(15 downto 0);
         data_out : out unsigned(15 downto 0)
     );
@@ -61,14 +58,21 @@ architecture a_microprocessador of microprocessador is
             clk, reset : in std_logic;
             last_adress : in unsigned(6 downto 0);
             adress_out :  out unsigned(6 downto 0);
-            instruction : in unsigned(15 downto 0)
+            instruction : in unsigned(15 downto 0);
+            operation : out unsigned(1 downto 0);
+            registrador : out unsigned(2 downto 0)
         );  
     end component;
 
+    signal wr_en : std_logic;
+    signal reg_wr : unsigned(2 downto 0);
+    signal imm : unsigned(15 downto 0);
     signal opcode: unsigned(3 downto 0);
+    signal operation: unsigned(1 downto 0);
+    signal registrador : unsigned(2 downto 0);
     signal instruction : unsigned(15 downto 0);
-    signal endereco : unsigned(6 downto 0) := "0000000";
     signal pc_in : unsigned(6 downto 0) := "0000000";
+    signal endereco : unsigned(6 downto 0) := "0000000";
     signal ula_out : unsigned(15 downto 0) := "0000000000000000";
     signal operando : unsigned(15 downto 0) := "0000000000000000";
     signal acumulador_value : unsigned(15 downto 0) := "0000000000000000";
@@ -83,25 +87,29 @@ architecture a_microprocessador of microprocessador is
             last_adress => endereco, 
             adress_out => pc_in, 
             instruction => instruction,
-            jump_en => jump_en
+            jump_en => jump_en,
+            operation => operation,
+            registrador => registrador
         );
 
-        -- rom_main : rom PORT MAP (clk, endereco, dado => instruction);
-        -- opcode <= instruction(3 downto 0);
-        -- imm <= instruction(15 downto 9);
-        -- reg <= instruction(8 downto 6);
+        rom_main : rom PORT MAP (clk, endereco, dado => instruction);
 
         banco_registradores : banco PORT MAP (
             clk=>clk,
             reset=>reset, 
             wr_en=>wr_en, 
             reg_wr=>reg_wr, 
-            reg_read=>reg_read, 
+            reg_read=>registrador, 
             data_in=>imm,
             data_out=>valor_registrador
         );
 
-        operando <= imm when sel_imm = '1' else valor_registrador;
+        opcode <= instruction(3 downto 0);
+        imm <= "000000000" & instruction(15 downto 9);
+        reg_wr <= instruction(8 downto 6);
+
+        wr_en <= '1' when opcode = "0011" else '0';
+        operando <= imm when opcode = "0010" else valor_registrador;
 
         ula_main : ula PORT MAP(
             operation=>operation, 

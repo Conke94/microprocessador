@@ -16,7 +16,7 @@ architecture a_pc of pc is
 begin
     process(clk, reset, wr_en)
     begin
-        if reset = '1' then registro <= "0000000";
+        if reset = '1' then registro <= "1111111";
         elsif wr_en = '1' then
             if rising_edge(clk) then 
                 registro <= data_in; 

@@ -2,13 +2,16 @@
 Nop:  XXXXXXX XXXXX 0000
 jump: AAAAAAA XXXXX 1111
 
-add: CCC XXXXXXXXX 1001
-addi : BBBBBBB XXXXX 1010
+add: XXXXXXX CCCXX 0001
+addi : IIIIIII XXXXX 0010
 
-sub: CCC XXXXXXXXX 0001
-subi : BBBBBBB XXXXX 0010
+sub: XXXXXXX CCCXX 1001
+subi : IIIIIII XXXXX 1010
+
+li: IIIIIII CCCXX 0011
 ------- ----- ----
 A: próximo endereço.
-B: imm.
+I: imm.
 C: endereço operando.
 X: irrelevante
+------------------

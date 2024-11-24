@@ -1,19 +1,19 @@
 v 4
-file . ".\microprocessador_tb.vhd" "44b119e7f360760e5d98abb529bbbffd216919cd" "20241117221658.990":
-  entity microprocessador_tb at 1( 0) + 0 on 41;
-  architecture a_microprocessador_tb of microprocessador_tb at 8( 120) + 0 on 42;
+file . ".\microprocessador_tb.vhd" "1ab8d54d30a09a2075f8c1de7aa1b780a1d2f2ce" "20241124230226.728":
+  entity microprocessador_tb at 1( 0) + 0 on 107;
+  architecture a_microprocessador_tb of microprocessador_tb at 8( 120) + 0 on 108;
 file . ".\rom\pc_tb.vhd" "aa9d629de4e74dfa926c272510ed9362d3b04800" "20241117215447.976":
   entity pc_tb at 1( 0) + 0 on 33;
   architecture a_pc_tb of pc_tb at 8( 106) + 0 on 34;
-file . ".\rom\rom.vhd" "fab4a41576a69381b2bda0276fb35ec78bb450ef" "20241124185225.552":
-  entity rom at 1( 0) + 0 on 67;
-  architecture a_rom of rom at 12( 240) + 0 on 68;
+file . ".\rom\rom.vhd" "367fa3d081ddbc43d4bd64470fa0acbe4d818c17" "20241124230235.151":
+  entity rom at 1( 0) + 0 on 109;
+  architecture a_rom of rom at 12( 240) + 0 on 110;
 file . ".\registradores\banco.vhd" "2687f3754c1e4dfa4d99400e749ef73e148a5ecb" "20241117171558.768":
   entity banco at 1( 0) + 0 on 17;
   architecture a_banco of banco at 15( 345) + 0 on 18;
-file . ".\microprocessador.vhd" "433c908adf24941c7cd43b9ef1beb1179efb2603" "20241124190208.890":
-  entity microprocessador at 1( 0) + 0 on 71;
-  architecture a_microprocessador of microprocessador at 15( 378) + 0 on 72;
+file . ".\microprocessador.vhd" "620818aa8e1704b4b045c9ca864b1b8ba27a29da" "20241124230927.394":
+  entity microprocessador at 1( 0) + 0 on 123;
+  architecture a_microprocessador of microprocessador at 12( 226) + 0 on 124;
 file . ".\ula\ula.vhd" "423a51c8329fe82c013d03fffcd68faf35750354" "20241117171543.013":
   entity ula at 1( 0) + 0 on 15;
   architecture a_ula of ula at 15( 332) + 1 on 16;
@@ -23,15 +23,15 @@ file . ".\registradores\reg16bits.vhd" "c6005270a30d5b96b52dba810e21cb42db7c84cc
 file . ".\rom\rom_tb.vhd" "f500b202a8e19fb8af957963c6c2ac2540c842ca" "20241117173654.512":
   entity rom_tb at 1( 0) + 0 on 25;
   architecture a_rom_tb of rom_tb at 8( 107) + 0 on 26;
-file . ".\rom\pc.vhd" "1454a582a2ccf8917bbfd23bb4b074f55a08ffa0" "20241117215420.338":
-  entity pc at 1( 0) + 0 on 31;
-  architecture a_pc of pc at 13( 254) + 0 on 32;
+file . ".\rom\pc.vhd" "1a07575c2e1217dc859ec929fab5f099db829c08" "20241124230921.737":
+  entity pc at 1( 0) + 0 on 121;
+  architecture a_pc of pc at 13( 254) + 0 on 122;
 file . ".\rom\increment.vhd" "d78187a9d7cb593a8a42a64e3ff439c6c492a38f" "20241117220708.425":
   entity increment at 1( 0) + 0 on 35;
   architecture a_increment of increment at 12( 226) + 1 on 36;
-file . ".\controller\controller.vhd" "463851598c58d0221aa3c8a194f9650cedd3169e" "20241124184907.314":
-  entity controller at 1( 0) + 0 on 63;
-  architecture a_controller of controller at 15( 352) + 1 on 64;
+file . ".\controller\controller.vhd" "b8a98504fe2de05f76818a57bdf6d2e7d12f64cf" "20241124230849.415":
+  entity controller at 1( 0) + 0 on 117;
+  architecture a_controller of controller at 17( 447) + 1 on 118;
 file . ".\state_machine\state_machine.vhd" "96b130c1de7bd3cca9f7775a735ff78ad8434994" "20241124184756.910":
   entity state_machine at 1( 0) + 0 on 61;
   architecture a_state_machine of state_machine at 11( 211) + 0 on 62;
