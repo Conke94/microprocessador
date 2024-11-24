@@ -60,11 +60,14 @@ architecture a_microprocessador of microprocessador is
             adress_out :  out unsigned(6 downto 0);
             instruction : in unsigned(15 downto 0);
             operation : out unsigned(1 downto 0);
-            registrador : out unsigned(2 downto 0)
+            registrador : out unsigned(2 downto 0);
+            state_out :  out unsigned(1 downto 0)
         );  
     end component;
 
     signal wr_en : std_logic;
+    signal state : unsigned(1 downto 0);
+    signal wr_en_acumulador : std_logic;
     signal reg_wr : unsigned(2 downto 0);
     signal imm : unsigned(15 downto 0);
     signal opcode: unsigned(3 downto 0);
@@ -89,7 +92,8 @@ architecture a_microprocessador of microprocessador is
             instruction => instruction,
             jump_en => jump_en,
             operation => operation,
-            registrador => registrador
+            registrador => registrador,
+            state_out => state
         );
 
         rom_main : rom PORT MAP (clk, endereco, dado => instruction);
@@ -120,5 +124,6 @@ architecture a_microprocessador of microprocessador is
             flag_carry=>ula_carry
         );
 
-        acumulador : reg16bits PORT MAP(clk => clk, reset => reset, wr_en => wr_en, data_in => ula_out, data_out => acumulador_value);
+        wr_en_acumulador <= '1' when ((opcode = "0010" or opcode = "0001") and state = "01")  else '0';
+        acumulador : reg16bits PORT MAP(clk => clk, reset => reset, wr_en => wr_en_acumulador, data_in => ula_out, data_out => acumulador_value);
 end architecture;

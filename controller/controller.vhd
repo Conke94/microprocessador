@@ -6,6 +6,7 @@ entity controller is
     port (   
         jump_en : out std_logic;
         clk, reset : in std_logic;
+        state_out: out unsigned(1 downto 0);
         operation: out unsigned(1 downto 0);
         last_adress : in unsigned(6 downto 0);
         adress_out :  out unsigned(6 downto 0);
@@ -28,6 +29,7 @@ entity controller is
     
     begin
         state_mach : state_machine PORT MAP(clk, reset, state);
+        state_out <= state;
 
         opcode <= instruction(3 downto 0);
         registrador <= instruction(8 downto 6);
