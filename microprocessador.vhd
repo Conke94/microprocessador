@@ -65,7 +65,8 @@ architecture a_microprocessador of microprocessador is
         );  
     end component;
 
-    signal rom_out : unsigned(15 downto 0);
+    signal opcode: unsigned(3 downto 0);
+    signal instruction : unsigned(15 downto 0);
     signal endereco : unsigned(6 downto 0) := "0000000";
     signal pc_in : unsigned(6 downto 0) := "0000000";
     signal ula_out : unsigned(15 downto 0) := "0000000000000000";
@@ -81,11 +82,14 @@ architecture a_microprocessador of microprocessador is
             reset => reset, 
             last_adress => endereco, 
             adress_out => pc_in, 
-            instruction => rom_out,
+            instruction => instruction,
             jump_en => jump_en
         );
 
-        rom_main : rom PORT MAP (clk, endereco, dado => rom_out);
+        -- rom_main : rom PORT MAP (clk, endereco, dado => instruction);
+        -- opcode <= instruction(3 downto 0);
+        -- imm <= instruction(15 downto 9);
+        -- reg <= instruction(8 downto 6);
 
         banco_registradores : banco PORT MAP (
             clk=>clk,
