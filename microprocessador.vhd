@@ -66,6 +66,7 @@ architecture a_microprocessador of microprocessador is
     end component;
 
     signal wr_en : std_logic;
+    signal data_acumulador : unsigned(15 downto 0);
     signal state : unsigned(1 downto 0);
     signal wr_en_acumulador : std_logic;
     signal reg_wr : unsigned(2 downto 0);
@@ -109,11 +110,11 @@ architecture a_microprocessador of microprocessador is
         );
 
         opcode <= instruction(3 downto 0);
-        imm <= "000000000" & instruction(15 downto 9);
-        reg_wr <= instruction(8 downto 6);
+        wr_en <= '1' when opcode = "0011" or opcode = "0100" or opcode="1010" else '0';
+        operando <= imm when opcode = "0010" or opcode="1010" else valor_registrador;
 
-        wr_en <= '1' when opcode = "0011" else '0';
-        operando <= imm when opcode = "0010" else valor_registrador;
+        imm <= acumulador_value when opcode = "0100" else "000000000" & instruction(15 downto 9);
+        reg_wr <= instruction(8 downto 6);
 
         ula_main : ula PORT MAP(
             operation=>operation, 
@@ -124,6 +125,7 @@ architecture a_microprocessador of microprocessador is
             flag_carry=>ula_carry
         );
 
-        wr_en_acumulador <= '1' when ((opcode = "0010" or opcode = "0001") and state = "01")  else '0';
-        acumulador : reg16bits PORT MAP(clk => clk, reset => reset, wr_en => wr_en_acumulador, data_in => ula_out, data_out => acumulador_value);
+        wr_en_acumulador <= '1' when ((opcode = "0010" or opcode = "0001" or opcode = "1010" or opcode = "0101") and state = "01")  else '0';
+        data_acumulador <= valor_registrador when opcode = "0101" else ula_out;
+        acumulador : reg16bits PORT MAP(clk => clk, reset => reset, wr_en => wr_en_acumulador, data_in => data_acumulador, data_out => acumulador_value);
 end architecture;

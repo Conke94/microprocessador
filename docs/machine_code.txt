@@ -9,6 +9,9 @@ sub: XXXXXXX CCCXX 1001
 subi : IIIIIII XXXXX 1010
 
 li: IIIIIII CCCXX 0011
+
+MOV1: XXXXXXX CCCXX 0100
+MOV2: XXXXXXX CCCXX 0101
 ------- ----- ----
 A: próximo endereço.
 I: imm.
