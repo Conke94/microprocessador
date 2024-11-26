@@ -4,14 +4,14 @@ use ieee.numeric_std.all;
 
 entity controller is
     port (   
-        jump_en : out std_logic;
+        jump_en, wr_acumulador : out std_logic;
         clk, reset : in std_logic;
-        state_out: out unsigned(1 downto 0);
         operation: out unsigned(1 downto 0);
         last_adress : in unsigned(6 downto 0);
         adress_out :  out unsigned(6 downto 0);
         instruction : in unsigned(15 downto 0);
-        registrador : out unsigned(2 downto 0)
+        registrador : out unsigned(2 downto 0);
+        wr_reg : out std_logic
     );  
  end entity;
 
@@ -29,7 +29,6 @@ entity controller is
     
     begin
         state_mach : state_machine PORT MAP(clk, reset, state);
-        state_out <= state;
 
         opcode <= instruction(3 downto 0);
         registrador <= instruction(8 downto 6);
@@ -44,4 +43,7 @@ entity controller is
         adress_out <= last_adress + 1 when jump = '0' and state = "10" else 
                       instruction(15 downto 9) when state = "10" else
                       last_adress;
- end architecture;
+        
+        wr_acumulador <= '1' when ((opcode = "0010" or opcode = "0001" or opcode = "1010" or opcode = "0101") and state = "01")  else '0';
+        wr_reg <= '1' when opcode = "0011" or opcode = "0100" or opcode="1010" else '0';
+    end architecture;
