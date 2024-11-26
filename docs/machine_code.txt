@@ -1,6 +1,6 @@
-------------OPCODE
-Nop:  XXXXXXX XXXXX 0000
-jump: AAAAAAA XXXXX 1111
+    MSD             LSB
+nop: XXXXXXX XXXXX 0000
+jmp: IIIIIII XXXXX 1111
 
 add: XXXXXXX CCCXX 0001
 addi : IIIIIII XXXXX 0010
@@ -10,11 +10,11 @@ subi : IIIIIII XXXXX 1010
 
 li: IIIIIII CCCXX 0011
 
-MOV1: XXXXXXX CCCXX 0100
-MOV2: XXXXXXX CCCXX 0101
+mov Rn,A: XXXXXXX CCCXX 0100
+mov A,Rn: XXXXXXX CCCXX 0101
 ------- ----- ----
-A: próximo endereço.
 I: imm.
 C: endereço operando.
 X: irrelevante
 ------------------
+

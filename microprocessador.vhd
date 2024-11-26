@@ -5,7 +5,6 @@ use ieee.numeric_std.all;
 entity microprocessador is
     port(
         clk, reset : in std_logic;
-        ula_zero, ula_carry, jump_en : out std_logic
     );
 end entity;
 
