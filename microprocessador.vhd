@@ -4,7 +4,7 @@ use ieee.numeric_std.all;
 
 entity microprocessador is
     port(
-        clk, reset : in std_logic;
+        clk, reset : in std_logic
     );
 end entity;
 
@@ -66,14 +66,14 @@ architecture a_microprocessador of microprocessador is
 
     signal opcode: unsigned(3 downto 0);
     signal operation: unsigned(1 downto 0);
-    signal wr_acumulador, wr_reg : std_logic;
     signal registrador : unsigned(2 downto 0);
     signal endereco, pc_in : unsigned(6 downto 0) := "0000000";
+    signal wr_acumulador, wr_reg, flag_zero, flag_carry, jump_en : std_logic;
     signal acumulador_value, ula_out, operando, valor_registrador, data_acumulador, instruction, imm : unsigned(15 downto 0) := "0000000000000000";
     
     begin
         banco_registradores : banco PORT MAP (clk, reset, wr_en => wr_reg, reg_wr => registrador, reg_read=>registrador, data_in=>imm,data_out=>valor_registrador);
-        ula_main : ula PORT MAP(operation=>operation, x=>acumulador_value, y=>operando, out_a=>ula_out, flag_zero=>ula_zero, flag_carry=>ula_carry);
+        ula_main : ula PORT MAP(operation=>operation, x=>acumulador_value, y=>operando, out_a=>ula_out, flag_zero=>flag_zero, flag_carry=>flag_carry);
         acumulador : reg16bits PORT MAP(clk, reset, wr_en => wr_acumulador, data_in => data_acumulador, data_out => acumulador_value);
         program_counter : pc PORT MAP(clk, reset, wr_en => '1', data_in => pc_in, data_out => endereco);
         rom_main : rom PORT MAP (clk, endereco, dado => instruction);

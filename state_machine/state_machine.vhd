@@ -14,7 +14,7 @@ begin
    process(clk, reset)
    begin
       if reset='1' then
-         state_s <= "00";
+         state_s <= "10";
       elsif rising_edge(clk) then
          if state_s="10" then 
             state_s <= "00";

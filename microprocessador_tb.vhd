@@ -8,8 +8,7 @@ end entity;
 architecture a_microprocessador_tb of microprocessador_tb is 
     component microprocessador
         port(
-            clk, reset : in std_logic;
-            ula_zero, ula_carry : out std_logic
+            clk, reset : in std_logic
         );
     end component;
 
@@ -21,8 +20,7 @@ architecture a_microprocessador_tb of microprocessador_tb is
 
     begin
         uut: microprocessador port map (
-            clk => clk, reset => reset,
-            ula_zero=>ula_zero, ula_carry=>ula_carry
+            clk => clk, reset => reset
         );
 
         reset_global : process
