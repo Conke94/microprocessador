@@ -2,10 +2,10 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity microprocessador_tb is
+entity processador_tb is
 end entity;
 
-architecture a_microprocessador_tb of microprocessador_tb is 
+architecture a_processador_tb of processador_tb is 
     component microprocessador
         port(
             clk, reset : in std_logic
