@@ -35,6 +35,14 @@ architecture a_microprocessador of microprocessador is
         );
     end component;
 
+    component reg1bit is
+        port(
+            clk, reset, wr_en : in std_logic;
+            data_in : in std_logic;
+            data_out : out std_logic
+        );
+    end component;
+
     component rom is
         port( 
             clk      : in std_logic;
@@ -69,7 +77,7 @@ architecture a_microprocessador of microprocessador is
     signal operation: unsigned(1 downto 0);
     signal registrador : unsigned(2 downto 0);
     signal endereco, pc_in : unsigned(6 downto 0) := "0000000";
-    signal wr_acumulador, wr_reg, flag_zero, flag_carry, jump_en : std_logic;
+    signal wr_acumulador, wr_reg, flag_zero, flag_carry, jump_en, flag_zero_from_reg : std_logic;
     signal acumulador_value, ula_out, operando, valor_registrador, data_acumulador, instruction, imm : unsigned(15 downto 0) := "0000000000000000";
     signal state : unsigned(1 downto 0);
     signal wr_pc : std_logic;
@@ -84,7 +92,7 @@ architecture a_microprocessador of microprocessador is
         controller_unit : controller PORT MAP (
             clk, 
             reset, 
-            flag_zero=>flag_zero,
+            flag_zero=>flag_zero_from_reg,
             last_adress => endereco, 
             adress_out => pc_in, 
             instruction => instruction,
@@ -95,6 +103,8 @@ architecture a_microprocessador of microprocessador is
             wr_reg => wr_reg,
             state_out => state
         );
+
+        flag_zero_reg : reg1bit PORT MAP(clk, reset, wr_en => '1', data_in => flag_zero, data_out => flag_zero_from_reg);
         
         wr_pc <= '1' when state = "10" else '0';
         imm <= acumulador_value when opcode = "0100" else "000000000" & instruction(15 downto 9);
