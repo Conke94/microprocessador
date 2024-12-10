@@ -53,7 +53,7 @@ architecture a_microprocessador of microprocessador is
 
     component controller is
         port (   
-            clk, reset : in std_logic;
+            clk, reset, flag_zero : in std_logic;
             jump_en, wr_acumulador : out std_logic;
             operation : out unsigned(1 downto 0);
             last_adress : in unsigned(6 downto 0);
@@ -84,6 +84,7 @@ architecture a_microprocessador of microprocessador is
         controller_unit : controller PORT MAP (
             clk, 
             reset, 
+            flag_zero=>flag_zero,
             last_adress => endereco, 
             adress_out => pc_in, 
             instruction => instruction,
