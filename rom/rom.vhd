@@ -26,7 +26,7 @@ architecture a_rom of rom is
       7  => "0000000010000100", -- mov s2,A;
 
       8  => "0011110000000011", -- li s0,30;
-      9  => "0011110000001010", -- subi A,A,30
+      9  => "0011110000001000", -- cmpr A,s0
       10  => "1111000000000110", -- bne -8   
       others => (others=>'0')
       -- FAZ A SUBTRAÇÃO COM 30 E CHAMA O COMANDO DA BRANCH, SE A SUBTRAÇÃO FOR ZERO, ATIVA A FLAG E FAZ O BRANCH

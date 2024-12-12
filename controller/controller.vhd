@@ -35,7 +35,7 @@ entity controller is
         registrador <= instruction(8 downto 6);
 
         operation <= "00" when opcode = "0001" or opcode = "0010" else
-                     "01" when opcode = "1001" or opcode = "1010" else
+                     "01" when opcode = "1001" or opcode = "1010" or opcode="1000" else
                      "00";
 
         jump <= '1' when opcode="1111" else '0'; 
@@ -46,8 +46,8 @@ entity controller is
                       last_adress + 1 when jump = '0';
                       
         wr_pc <= '1' when state = "10" else '0';
-        wr_flag_zero <= '1' when ((opcode = "0001" or opcode = "0010" or opcode = "1001" or opcode = "1010") and state="01") else '0';
-        wr_flag_carry <= '1' when ((opcode = "0001" or opcode = "0010" or opcode = "1001" or opcode = "1010") and state="01") else '0';
+        wr_flag_zero <= '1' when ((opcode = "0001" or opcode = "0010" or opcode = "1001" or opcode = "1010" or opcode = "1000") and state="01") else '0';
+        wr_flag_carry <= '1' when ((opcode = "0001" or opcode = "0010" or opcode = "1001" or opcode = "1010" or opcode = "1000") and state="01") else '0';
 
         wr_acumulador <= '1' when ((opcode = "0010" or opcode = "0001" or opcode = "1010" or opcode = "0101") and state = "01")  else '0';
         wr_reg <= '1' when opcode = "0011" or opcode = "0100" or opcode="1010" else '0';

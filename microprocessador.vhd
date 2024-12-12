@@ -112,7 +112,6 @@ architecture a_microprocessador of microprocessador is
         flag_carry_reg : reg1bit PORT MAP(clk, reset, wr_en => wr_flag_carry, data_in => flag_carry, data_out => flag_carry_from_reg);
         
         imm <= acumulador_value when opcode = "0100" else "000000000" & instruction(15 downto 9);
-        -- wr_pc <= '1' when state = "10" else '0';
         opcode <= instruction(3 downto 0);
         
         operando <= imm when opcode = "0010" or opcode="1010" else valor_registrador;
