@@ -5,7 +5,7 @@ use ieee.numeric_std.all;
 entity controller is
     port (   
         jump_en, wr_acumulador : out std_logic;
-        clk, reset, flag_zero : in std_logic;
+        clk, reset, flag_zero, flag_carry : in std_logic;
         operation: out unsigned(1 downto 0);
         last_adress : in unsigned(6 downto 0);
         adress_out :  out unsigned(6 downto 0);
@@ -41,7 +41,7 @@ entity controller is
         jump <= '1' when opcode="1111" else '0'; 
         jump_en <= jump;
 
-        adress_out <= last_adress + instruction(15 downto 9) when opcode = "0110" and flag_zero = '0' else
+        adress_out <= last_adress + instruction(15 downto 9) when ((opcode = "0110" and flag_zero = '0') or (opcode = "0111" and flag_carry = '1')) else
                       instruction(15 downto 9) when jump = '1' else
                       last_adress + 1 when jump = '0';
                       

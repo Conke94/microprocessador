@@ -61,7 +61,7 @@ architecture a_microprocessador of microprocessador is
 
     component controller is
         port (   
-            clk, reset, flag_zero : in std_logic;
+            clk, reset, flag_zero, flag_carry : in std_logic;
             jump_en, wr_acumulador : out std_logic;
             operation : out unsigned(1 downto 0);
             last_adress : in unsigned(6 downto 0);
@@ -77,7 +77,7 @@ architecture a_microprocessador of microprocessador is
     signal operation: unsigned(1 downto 0);
     signal registrador : unsigned(2 downto 0);
     signal endereco, pc_in : unsigned(6 downto 0) := "0000000";
-    signal wr_acumulador, wr_reg, flag_zero, flag_carry, jump_en, flag_zero_from_reg, wr_flag_zero : std_logic;
+    signal wr_acumulador, wr_reg, flag_zero, flag_carry, jump_en, flag_zero_from_reg, flag_carry_from_reg, wr_flag_zero, wr_flag_carry : std_logic;
     signal acumulador_value, ula_out, operando, valor_registrador, data_acumulador, instruction, imm : unsigned(15 downto 0) := "0000000000000000";
     signal state : unsigned(1 downto 0);
     signal wr_pc : std_logic;
@@ -93,6 +93,7 @@ architecture a_microprocessador of microprocessador is
             clk, 
             reset, 
             flag_zero=>flag_zero_from_reg,
+            flag_carry=>flag_carry_from_reg,
             last_adress => endereco, 
             adress_out => pc_in, 
             instruction => instruction,
@@ -105,8 +106,11 @@ architecture a_microprocessador of microprocessador is
         );
 
         flag_zero_reg : reg1bit PORT MAP(clk, reset, wr_en => wr_flag_zero, data_in => flag_zero, data_out => flag_zero_from_reg);
-        
+        flag_carry_reg : reg1bit PORT MAP(clk, reset, wr_en => wr_flag_carry, data_in => flag_carry, data_out => flag_carry_from_reg);
+
         wr_flag_zero <= '1' when ((opcode = "0001" or opcode = "0010" or opcode = "1001" or opcode = "1010") and state="01") else '0';
+        wr_flag_carry <= '1' when ((opcode = "0001" or opcode = "0010" or opcode = "1001" or opcode = "1010") and state="01") else '0';
+        
         imm <= acumulador_value when opcode = "0100" else "000000000" & instruction(15 downto 9);
         wr_pc <= '1' when state = "10" else '0';
         opcode <= instruction(3 downto 0);
