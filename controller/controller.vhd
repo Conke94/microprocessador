@@ -35,7 +35,7 @@ entity controller is
         registrador <= instruction(8 downto 6);
 
         operation <= "00" when opcode = "0001" or opcode = "0010" else
-                     "01" when opcode = "1001" or opcode = "1010" or opcode = "0110" else
+                     "01" when opcode = "1001" or opcode = "1010" else
                      "00";
 
         jump <= '1' when opcode="1111" else '0'; 
