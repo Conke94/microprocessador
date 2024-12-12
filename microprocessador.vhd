@@ -61,15 +61,15 @@ architecture a_microprocessador of microprocessador is
 
     component controller is
         port (   
+            jump_en, wr_acumulador, wr_flag_zero, wr_flag_carry, wr_pc : out std_logic;
             clk, reset, flag_zero, flag_carry : in std_logic;
-            jump_en, wr_acumulador : out std_logic;
             operation : out unsigned(1 downto 0);
             last_adress : in unsigned(6 downto 0);
             adress_out :  out unsigned(6 downto 0);
             instruction : in unsigned(15 downto 0);
             registrador : out unsigned(2 downto 0);
-            wr_reg : out std_logic;
-            state_out : out unsigned(1 downto 0)
+            state_out : out unsigned(1 downto 0);
+            wr_reg : out std_logic
         );  
     end component;
 
@@ -90,29 +90,29 @@ architecture a_microprocessador of microprocessador is
         rom_main : rom PORT MAP (clk, endereco, dado => instruction);
 
         controller_unit : controller PORT MAP (
-            clk, 
-            reset, 
+            clk => clk, 
+            reset => reset, 
+            wr_pc => wr_pc,
+            wr_reg => wr_reg,
+            state_out => state,
+            jump_en => jump_en,
+            adress_out => pc_in, 
+            operation => operation,
+            last_adress => endereco, 
+            registrador => registrador,
+            instruction => instruction,
+            wr_flag_zero => wr_flag_zero,
             flag_zero=>flag_zero_from_reg,
             flag_carry=>flag_carry_from_reg,
-            last_adress => endereco, 
-            adress_out => pc_in, 
-            instruction => instruction,
-            jump_en => jump_en,
-            operation => operation,
-            registrador => registrador,
             wr_acumulador => wr_acumulador,
-            wr_reg => wr_reg,
-            state_out => state
+            wr_flag_carry => wr_flag_carry
         );
 
         flag_zero_reg : reg1bit PORT MAP(clk, reset, wr_en => wr_flag_zero, data_in => flag_zero, data_out => flag_zero_from_reg);
         flag_carry_reg : reg1bit PORT MAP(clk, reset, wr_en => wr_flag_carry, data_in => flag_carry, data_out => flag_carry_from_reg);
-
-        wr_flag_zero <= '1' when ((opcode = "0001" or opcode = "0010" or opcode = "1001" or opcode = "1010") and state="01") else '0';
-        wr_flag_carry <= '1' when ((opcode = "0001" or opcode = "0010" or opcode = "1001" or opcode = "1010") and state="01") else '0';
         
         imm <= acumulador_value when opcode = "0100" else "000000000" & instruction(15 downto 9);
-        wr_pc <= '1' when state = "10" else '0';
+        -- wr_pc <= '1' when state = "10" else '0';
         opcode <= instruction(3 downto 0);
         
         operando <= imm when opcode = "0010" or opcode="1010" else valor_registrador;

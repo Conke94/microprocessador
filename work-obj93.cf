@@ -5,18 +5,18 @@ file . ".\processador_tb.vhd" "d8ca9b99cecf886f7b35292eafbd5fd1323c4f96" "202412
 file . ".\ula\ula.vhd" "423a51c8329fe82c013d03fffcd68faf35750354" "20241128195810.600":
   entity ula at 1( 0) + 0 on 29;
   architecture a_ula of ula at 15( 332) + 1 on 30;
-file . ".\controller\controller.vhd" "e1cb6e440f8f294ca96b9f76cd338fcbac754194" "20241212002243.433":
-  entity controller at 1( 0) + 0 on 77;
-  architecture a_controller of controller at 19( 565) + 1 on 78;
-file . ".\rom\rom.vhd" "c16f588787a304bc9c6065bcb442f0b79d616124" "20241212010930.877":
-  entity rom at 2( 42) + 0 on 93;
-  architecture a_rom of rom at 13( 282) + 0 on 94;
+file . ".\controller\controller.vhd" "5e740ae4b9cb53dcc0675663a572b3c3d0c05bac" "20241212192301.597":
+  entity controller at 1( 0) + 0 on 103;
+  architecture a_controller of controller at 19( 601) + 1 on 104;
+file . ".\rom\rom.vhd" "f523a88ddf53110bde4e3899dbfc643adeaa1c42" "20241212193036.312":
+  entity rom at 2( 42) + 0 on 111;
+  architecture a_rom of rom at 13( 282) + 0 on 112;
 file . ".\registradores\reg16bits.vhd" "c6005270a30d5b96b52dba810e21cb42db7c84cc" "20241128195621.192":
   entity reg16bits at 1( 0) + 0 on 13;
   architecture a_reg16bits of reg16bits at 15( 310) + 0 on 14;
-file . ".\microprocessador.vhd" "3b244056155870dfd59808619bd58db002b465aa" "20241212002253.079":
-  entity microprocessador at 1( 0) + 0 on 79;
-  architecture a_microprocessador of microprocessador at 11( 171) + 0 on 80;
+file . ".\microprocessador.vhd" "28f5d0405c4e627fcb0f5210110353b861c1b404" "20241212193044.697":
+  entity microprocessador at 1( 0) + 0 on 113;
+  architecture a_microprocessador of microprocessador at 11( 171) + 0 on 114;
 file . ".\registradores\banco.vhd" "2687f3754c1e4dfa4d99400e749ef73e148a5ecb" "20241128195629.064":
   entity banco at 1( 0) + 0 on 15;
   architecture a_banco of banco at 15( 345) + 0 on 16;

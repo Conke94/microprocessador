@@ -4,7 +4,7 @@ use ieee.numeric_std.all;
 
 entity controller is
     port (   
-        jump_en, wr_acumulador : out std_logic;
+        jump_en, wr_acumulador, wr_flag_zero, wr_flag_carry, wr_pc : out std_logic;
         clk, reset, flag_zero, flag_carry : in std_logic;
         operation: out unsigned(1 downto 0);
         last_adress : in unsigned(6 downto 0);
@@ -45,6 +45,9 @@ entity controller is
                       instruction(15 downto 9) when jump = '1' else
                       last_adress + 1 when jump = '0';
                       
+        wr_pc <= '1' when state = "10" else '0';
+        wr_flag_zero <= '1' when ((opcode = "0001" or opcode = "0010" or opcode = "1001" or opcode = "1010") and state="01") else '0';
+        wr_flag_carry <= '1' when ((opcode = "0001" or opcode = "0010" or opcode = "1001" or opcode = "1010") and state="01") else '0';
 
         wr_acumulador <= '1' when ((opcode = "0010" or opcode = "0001" or opcode = "1010" or opcode = "0101") and state = "01")  else '0';
         wr_reg <= '1' when opcode = "0011" or opcode = "0100" or opcode="1010" else '0';
