@@ -61,11 +61,11 @@ architecture a_microprocessador of microprocessador is
 
     component controller is
         port (   
-            jump_en, wr_acumulador, wr_flag_zero, wr_flag_carry, wr_pc : out std_logic;
+            jump_en, wr_acumulador, wr_flag_zero, wr_flag_carry, wr_pc, wr_ram : out std_logic;
             clk, reset, flag_zero, flag_carry : in std_logic;
             operation : out unsigned(1 downto 0);
             last_adress : in unsigned(6 downto 0);
-            adress_out :  out unsigned(6 downto 0);
+            adress_out, ram_address :  out unsigned(6 downto 0);
             instruction : in unsigned(15 downto 0);
             registrador : out unsigned(2 downto 0);
             state_out : out unsigned(1 downto 0);
@@ -73,19 +73,29 @@ architecture a_microprocessador of microprocessador is
         );  
     end component;
 
+    component ram is
+        port(
+            clk, wr_en : in std_logic;
+            endereco : in unsigned(6 downto 0);
+            dado_in  : in unsigned(15 downto 0);
+            dado_out : out unsigned(15 downto 0) 
+        );
+    end component;
+
     signal opcode: unsigned(3 downto 0);
     signal operation: unsigned(1 downto 0);
     signal registrador : unsigned(2 downto 0);
-    signal endereco, pc_in : unsigned(6 downto 0) := "0000000";
+    signal endereco, pc_in, ram_address : unsigned(6 downto 0) := "0000000";
     signal wr_acumulador, wr_reg, flag_zero, flag_carry, jump_en, flag_zero_from_reg, flag_carry_from_reg, wr_flag_zero, wr_flag_carry : std_logic;
-    signal acumulador_value, ula_out, operando, valor_registrador, data_acumulador, instruction, imm : unsigned(15 downto 0) := "0000000000000000";
+    signal acumulador_value, ula_out, operando, valor_registrador, data_acumulador, instruction, valor_ram, imm : unsigned(15 downto 0) := "0000000000000000";
     signal state : unsigned(1 downto 0);
-    signal wr_pc : std_logic;
+    signal wr_pc, wr_ram : std_logic;
     
     begin
         banco_registradores : banco PORT MAP (clk, reset, wr_en => wr_reg, reg_wr => registrador, reg_read=>registrador, data_in=>imm,data_out=>valor_registrador);
         ula_main : ula PORT MAP(operation=>operation, x=>acumulador_value, y=>operando, out_a=>ula_out, flag_zero=>flag_zero, flag_carry=>flag_carry);
         acumulador : reg16bits PORT MAP(clk, reset, wr_en => wr_acumulador, data_in => data_acumulador, data_out => acumulador_value);
+        ram_main : ram PORT MAP (clk=>clk,wr_en=>wr_ram,endereco=>ram_address,dado_in=>valor_registrador,dado_out=>valor_ram);
         program_counter : pc PORT MAP(clk, reset, wr_en => wr_pc, data_in => pc_in, data_out => endereco);
         rom_main : rom PORT MAP (clk, endereco, dado => instruction);
 
@@ -94,11 +104,13 @@ architecture a_microprocessador of microprocessador is
             reset => reset, 
             wr_pc => wr_pc,
             wr_reg => wr_reg,
+            wr_ram => wr_ram,
             state_out => state,
             jump_en => jump_en,
             adress_out => pc_in, 
             operation => operation,
             last_adress => endereco, 
+            ram_address => ram_address,
             registrador => registrador,
             instruction => instruction,
             wr_flag_zero => wr_flag_zero,

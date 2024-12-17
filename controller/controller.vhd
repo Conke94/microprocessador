@@ -4,11 +4,11 @@ use ieee.numeric_std.all;
 
 entity controller is
     port (   
-        jump_en, wr_acumulador, wr_flag_zero, wr_flag_carry, wr_pc : out std_logic;
+        jump_en, wr_acumulador, wr_flag_zero, wr_flag_carry, wr_pc, wr_ram : out std_logic;
         clk, reset, flag_zero, flag_carry : in std_logic;
         operation: out unsigned(1 downto 0);
         last_adress : in unsigned(6 downto 0);
-        adress_out :  out unsigned(6 downto 0);
+        adress_out, ram_address :  out unsigned(6 downto 0);
         instruction : in unsigned(15 downto 0);
         registrador : out unsigned(2 downto 0);
         wr_reg : out std_logic;
@@ -52,4 +52,7 @@ entity controller is
         wr_acumulador <= '1' when ((opcode = "0010" or opcode = "0001" or opcode = "1010" or opcode = "0101") and state = "01")  else '0';
         wr_reg <= '1' when opcode = "0011" or opcode = "0100" or opcode="1010" else '0';
         state_out <= state;
+
+        wr_ram <= '1' when opcode = "1100" else '0'; 
+        ram_address <= instruction(15 downto 9);
     end architecture;
