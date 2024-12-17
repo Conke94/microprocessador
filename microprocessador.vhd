@@ -87,15 +87,15 @@ architecture a_microprocessador of microprocessador is
     signal registrador : unsigned(2 downto 0);
     signal endereco, pc_in, ram_address : unsigned(6 downto 0) := "0000000";
     signal wr_acumulador, wr_reg, flag_zero, flag_carry, jump_en, flag_zero_from_reg, flag_carry_from_reg, wr_flag_zero, wr_flag_carry : std_logic;
-    signal acumulador_value, ula_out, operando, valor_registrador, data_acumulador, instruction, valor_ram, imm : unsigned(15 downto 0) := "0000000000000000";
+    signal acumulador_value, ula_out, operando, valor_registrador, data_acumulador, instruction, ram_value, imm, data_reg : unsigned(15 downto 0) := "0000000000000000";
     signal state : unsigned(1 downto 0);
     signal wr_pc, wr_ram : std_logic;
     
     begin
-        banco_registradores : banco PORT MAP (clk, reset, wr_en => wr_reg, reg_wr => registrador, reg_read=>registrador, data_in=>imm,data_out=>valor_registrador);
+        banco_registradores : banco PORT MAP (clk, reset, wr_en => wr_reg, reg_wr => registrador, reg_read=>registrador, data_in=>data_reg,data_out=>valor_registrador);
         ula_main : ula PORT MAP(operation=>operation, x=>acumulador_value, y=>operando, out_a=>ula_out, flag_zero=>flag_zero, flag_carry=>flag_carry);
         acumulador : reg16bits PORT MAP(clk, reset, wr_en => wr_acumulador, data_in => data_acumulador, data_out => acumulador_value);
-        ram_main : ram PORT MAP (clk=>clk,wr_en=>wr_ram,endereco=>ram_address,dado_in=>valor_registrador,dado_out=>valor_ram);
+        ram_main : ram PORT MAP (clk=>clk,wr_en=>wr_ram,endereco=>ram_address,dado_in=>valor_registrador,dado_out=>ram_value);
         program_counter : pc PORT MAP(clk, reset, wr_en => wr_pc, data_in => pc_in, data_out => endereco);
         rom_main : rom PORT MAP (clk, endereco, dado => instruction);
 
@@ -119,6 +119,8 @@ architecture a_microprocessador of microprocessador is
             wr_acumulador => wr_acumulador,
             wr_flag_carry => wr_flag_carry
         );
+
+        data_reg <= ram_value when opcode = "1011" else imm;
 
         flag_zero_reg : reg1bit PORT MAP(clk, reset, wr_en => wr_flag_zero, data_in => flag_zero, data_out => flag_zero_from_reg);
         flag_carry_reg : reg1bit PORT MAP(clk, reset, wr_en => wr_flag_carry, data_in => flag_carry, data_out => flag_carry_from_reg);
