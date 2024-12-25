@@ -129,5 +129,5 @@ architecture a_microprocessador of microprocessador is
         opcode <= instruction(3 downto 0);
         
         operando <= imm when opcode = "0010" or opcode="1010" else valor_registrador;
-        data_acumulador <= valor_registrador when opcode = "0101" else ram_value_from_reg when opcode = "1011" else ula_out;
+        data_acumulador <= valor_registrador when opcode = "0101" else ram_value when opcode = "1011" else ula_out;
 end architecture;

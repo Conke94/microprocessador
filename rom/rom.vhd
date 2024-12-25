@@ -1,4 +1,6 @@
--- VERIFICAR SE VAI PARA BRANCH DO CARRY
+-- SALVA NO REGISTRADOR DA RAM (SIM)
+-- PASSA PARA O ACUMULADOR (NÃO)
+-- PASSA PARA O REGISTRADOR NO PRÓXIMO COMANDO (?)
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
@@ -27,6 +29,9 @@ architecture a_rom of rom is
       8  => "0000000100000011", -- li s4,0
       9  => "0000000001000101", -- mov A,s1
       10 => "0000000100001100", -- sw A,$s4
+
+      11 => "0000000010001011", -- lw A,$s2
+      12 => "0000000000000100", -- mov s0,A
       others => (others=>'0')
    );
 begin

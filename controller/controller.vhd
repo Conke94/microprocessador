@@ -49,8 +49,8 @@ entity controller is
         wr_flag_zero <= '1' when ((opcode = "0001" or opcode = "0010" or opcode = "1001" or opcode = "1010" or opcode = "1000") and state="01") else '0';
         wr_flag_carry <= '1' when ((opcode = "0001" or opcode = "0010" or opcode = "1001" or opcode = "1010" or opcode = "1000") and state="01") else '0';
 
-        wr_acumulador <= '1' when ((opcode = "0010" or opcode = "0001" or opcode = "1010" or opcode = "0101") and state = "01")  else '0';
-        wr_reg <= '1' when (opcode = "0011" or opcode = "0100" or opcode="1010" or opcode = "1011") and state="10" else '0';
+        wr_acumulador <= '1' when ((opcode = "0010" or opcode = "0001" or opcode = "1010" or opcode = "0101" or opcode = "1011") and state = "01")  else '0';
+        wr_reg <= '1' when (opcode = "0011" or opcode = "0100" or opcode="1010") and state="10" else '0';
         state_out <= state;
 
         wr_ram <= '1' when opcode = "1100" else '0'; 
