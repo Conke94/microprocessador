@@ -8,7 +8,7 @@ entity controller is
         clk, reset, flag_zero, flag_carry : in std_logic;
         operation: out unsigned(1 downto 0);
         last_adress : in unsigned(6 downto 0);
-        adress_out, ram_address :  out unsigned(6 downto 0);
+        adress_out :  out unsigned(6 downto 0);
         instruction : in unsigned(15 downto 0);
         registrador : out unsigned(2 downto 0);
         wr_reg : out std_logic;
@@ -54,5 +54,4 @@ entity controller is
         state_out <= state;
 
         wr_ram <= '1' when opcode = "1100" else '0'; 
-        ram_address <= instruction(15 downto 9);
     end architecture;
