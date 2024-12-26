@@ -1,27 +1,21 @@
-    MSD             LSB
-nop: XXXXXXX XXXXX 0000
-add: XXXXXXX CCCXX 0001
-addi : IIIIIII XXXXX 0010
-li: IIIIIII CCCXX 0011
-mov Rn,A: XXXXXXX CCCXX 0100
-mov A,Rn: XXXXXXX CCCXX 0101
-bne: IIIIIII XXXXX 0110
-bcs: IIIIIII XXXXX 0111
-cmpr: XXXXXXX CCCXX 1000
-sub: XXXXXXX CCCXX 1001
-subi : IIIIIII XXXXX 1010
-lw : XXXXXXX CCCXX 1011 -- carrega para o acumulador o que está no endereço apontado pelo registrador.
-sw : XXXXXXX CCCXX 1100 -- salva o que está no acumulador no endereço apontado pelo registrador. 
-jmp: IIIIIII XXXXX 1111
 
-
-
-
-
-
+nop:      XXXXXXX XXXXX 0000
+add:      XXXXXXX CCCXX 0001 -- soma o valor de um registrador com no acumulador.
+addi :    IIIIIII XXXXX 0010 -- soma uma constante ao acumulador.
+li:       IIIIIII CCCXX 0011 -- adiciona uma constante em algum registrador.
+mov Rn,A: XXXXXXX CCCXX 0100 -- move o que está no acumulador para o registrador Rn.
+mov A,Rn: XXXXXXX CCCXX 0101 -- move o que está no registrador Rn para o acumulador.
+bne:      IIIIIII XXXXX 0110 -- salto condicional com a flag de zero (branch (if) not equal).
+bcs:      IIIIIII XXXXX 0111 -- salto condicional com a flag de carry.
+cmpr:     XXXXXXX CCCXX 1000 -- compara o valor do acumulador com o de algum registrador.
+sub:      XXXXXXX CCCXX 1001 -- subtrai o acumulador com o valor de algum registrador.
+subi :    IIIIIII XXXXX 1010 -- subtrai o acumulador com uma constante.
+lw :      XXXXXXX CCCXX 1011 -- carrega para o acumulador o que está na posição da ram apontado pelo registrador.
+sw :      XXXXXXX CCCXX 1100 -- salva o que está no acumulador na posição da ram apontada pelo registrador. 
+jmp:      IIIIIII XXXXX 1111 -- salta para um endereço da rom fixo.
 ------- ----- ----
-I: imm.
-C: endereço operando.
+I: consante.
+C: registrador.
 X: irrelevante
 ------------------
 
