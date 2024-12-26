@@ -36,6 +36,7 @@ entity controller is
 
         operation <= "00" when opcode = "0001" or opcode = "0010" else
                      "01" when opcode = "1001" or opcode = "1010" or opcode="1000" else
+                     "10" when opcode = "1101" else
                      "00";
 
         jump <= '1' when opcode="1111" else '0'; 
@@ -47,7 +48,7 @@ entity controller is
                       
         wr_pc <= '1' when state = "10" else '0';
         wr_flag_zero <= '1' when ((opcode = "0001" or opcode = "0010" or opcode = "1001" or opcode = "1010" or opcode = "1000") and state="01") else '0';
-        wr_flag_carry <= '1' when ((opcode = "0001" or opcode = "0010" or opcode = "1001" or opcode = "1010" or opcode = "1000") and state="01") else '0';
+        wr_flag_carry <= '1' when ((opcode = "0001" or opcode = "0010" or opcode = "1001" or opcode = "1010" or opcode = "1000" or opcode = "1101") and state="01") else '0';
 
         wr_acumulador <= '1' when ((opcode = "0010" or opcode = "0001" or opcode = "1010" or opcode = "0101" or opcode = "1011") and state = "01")  else '0';
         wr_reg <= '1' when (opcode = "0011" or opcode = "0100" or opcode="1010") and state="10" else '0';

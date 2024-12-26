@@ -14,7 +14,7 @@ entity ula is
 
  architecture a_ula of ula is
     signal result : unsigned(15 downto 0);
-    signal carry_sum, carry_sub : std_logic;
+    signal carry_sum, carry_sub, carry_sl : std_logic;
     signal x_increased, y_increased, sum_increased: unsigned(16 downto 0);
 
     begin
@@ -23,15 +23,17 @@ entity ula is
 
         carry_sum <= sum_increased(16);
         carry_sub <= '0' WHEN y <= x ELSE '1';
+        carry_sl <= shift_left(x_increased, to_integer(y))(16);
 
         flag_carry <= carry_sum WHEN operation = "00" else 
                       carry_sub WHEN operation = "01" else
+                      carry_sl WHEN operation = "10" else
                       '0';
 
         -- Faz a operação escolhida
         result <= x+y when operation = "00" else
                   x-y when operation = "01" else
-                  shift_right(x, to_integer(y)) when operation = "10" else
+                  shift_left(x, to_integer(y)) when operation = "10" else
                   x xor y when operation = "11" else
                   x;
 

@@ -12,6 +12,7 @@ sub:      XXXXXXX CCCXX 1001 -- subtrai o acumulador com o valor de algum regist
 subi :    IIIIIII XXXXX 1010 -- subtrai o acumulador com uma constante.
 lw :      XXXXXXX CCCXX 1011 -- carrega para o acumulador o que está na posição da ram apontado pelo registrador.
 sw :      XXXXXXX CCCXX 1100 -- salva o que está no acumulador na posição da ram apontada pelo registrador. 
+sll I:    IIIIIII XXXXX 1101 -- left shift no acumulador.
 jmp:      IIIIIII XXXXX 1111 -- salta para um endereço da rom fixo.
 ------- ----- ----
 I: consante.
